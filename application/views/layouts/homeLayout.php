@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>www.xample.com</title>
+    <link rel="stylesheet" href="./public/css/home.css">
+    <title>www.example.com</title>
 </head>
 <body>
-    <h1>Welcome to home page</h1>
+    <header>
+        <nav>
+            <a href='/'>Example</a>
+            <a href="#">News</a>
+            <a href='#'>Sign In</a>
+            <a href='#'>Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        Welcome to Home Page of www.Example.com!
+    </main>
+    <footer>
+        <p>&copy;Example & Co 2019</p>
+    </footer>
 </body>
 </html>

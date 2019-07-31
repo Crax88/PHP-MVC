@@ -7,9 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./public/css/errors.css">
     <title>Error</title>
-    <style>
-    
-    </style>
 </head>
 <body>
     <div>

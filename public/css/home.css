@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: calc(1vh + 1vw +1%);
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(2, 138, 138);
+}
+header a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-right: 2rem;
+}
+header {
+    height: 10vh;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+footer {
+    height: 5vh;
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 2px solid black;
+    position: relative;
+    left: 0;
+    top: 80vh;
+}
