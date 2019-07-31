@@ -1,41 +1,51 @@
 <?php
 
+spl_autoload_register('Core::autoload');
 
-class App 
-{   
-    public $routes;
+class Core 
+{
+    private $pathes = false;
 
-
-    public function __construct($routes) {
-        $this->routes = $routes;
+    public function __construct($pathes) {
+        $this->pathes = $pathes['path'];
     }
 
-    public function start($uriArr) {
-       $cName = array_shift($uriArr);
-       $aName = array_shift($uriArr);
-       try {
-            $this->runController($cName, $aName);
-       } catch (httpException $error) {
-           $error->sendHttpState();
-           $this->runController('errors', 'notfound');
-       }
-
+    public static function autoload($name){
+        include BASE_PATH . 'framework' . DS . 'classes' . DS . $name . '.php';
     }
-
-    protected function runController($controller, $action) {
-        $cName = strtolower($controller) . 'Controller';
-        $aName = strtolower($action) . 'Action';
-        if(!file_exists($this->routes['path']['controllers'] . $cName . '.php')) {
-           throw new httpException(404, 'Controller File Not Found');
+    public function lunch($uri) {
+        $controllerName = 'controllerHome';
+        $actionName = 'actionIndex';
+        $route = explode(' ', trim(str_replace('/', ' ', $uri)));
+        
+        if(!empty($route[0])) {
+            $controllerName = 'controller' . ucfirst($route[0]);
         }
-        require_once $this->routes['path']['controllers'] . $cName . '.php';
-        if(!class_exists($cName)) {
-            throw new httpException(404, 'Controller class not found');
+        if(!empty($route[1])) {
+            $actionName = 'action' . ucfirst($route[1]);
         }
-        $controller = new $cName;
-        if(!method_exists($controller, $aName)) {
-            throw new httpException(404, 'Action' . $aName . 'in' . $cName . 'not found ');
+        try {
+            $this->runController($controllerName, $actionName);
+        } catch (httpException $error) {
+            $error->sendHttpState();
+            $this->runController('controllerErrors', 'action' . $error->getCode());
         }
-        $controller->$aName();
     }
+    private function runController($controllerName, $actionName) {
+        $controllerFile = $this->pathes['controllers'] . $controllerName . '.php';
+        if(file_exists($controllerFile)) {
+            include_once $controllerFile;
+        } else {
+            throw new httpException(404, 'controller' . $controllerName . 'not found in' . $controllerFile);
+        }
+        $controller = new $controllerName(strtolower(str_replace('controller', '', $controllerName)) . 'Layout');
+        if(method_exists($controller, $actionName)) {
+            $controller->$actionName();
+        } else {
+            throw new httpException(404, $actionName . 'not found in' . $controllerFile);
+        }
+    }
+    // public function getPathes() {
+    //     return $this->pathes;
+    // }
 }

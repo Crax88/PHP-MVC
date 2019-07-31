@@ -10,6 +10,6 @@ class httpException extends Exception
         parent::__construct($msg, $code);
     }
     public function sendHttpState() {
-        header('HTTP/1.0' . $this->getCode() . ' ' . $this->httpMessages[$this->getCode()]);
+        header('HTTP/1.1' . ' ' . $this->getCode() . ' ' . $this->httpMessages[$this->getCode()]);
     }
 }

@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: teal;
+    height: 100vh;
+}
+div {
+    margin: 30vh auto;
+    padding: 10px;
+    border: 2px solid black;
+    width: 70%;
+}
+h1, h2 {
+    text-align: center;
+    color: red;
+    font-size: 5rem;
+}
+h2 {
+    font-size: 3rem;
+}
